@@ -1,13 +1,12 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import NavBar from "./nav/NavBar";
-import HomePage from "./components/HomePage";
-import Signup from "./components/auth/Signup";
-import Login from "./components/auth/Login";
-import AISymptomsChecker from "./components/patient/AISymptomsChecker";
-import Categories from "./components/doctor/categories";
-import DoctorByCategory from "./components/doctor/DoctorByCategory";
-import DoctorProfile from "./components/doctor/DoctorProfile";
-import { useEffect } from "react";
+import NavBar from "./nav/NavBar.jsx";
+import HomePage from "./components/Homepage.jsx";
+import Signup from "./components/auth/Signup.jsx";
+import Login from "./components/auth/Login.jsx";
+import AISymptomsChecker from "./components/patient/AISymptomsChecker.jsx";
+import Categories from "./components/doctor/Categories.jsx";
+import DoctorByCategory from "./components/doctor/DoctorByCategory.jsx";
+import DoctorProfile from "./components/doctor/DoctorProfile.jsx";
 
 function App() {
 

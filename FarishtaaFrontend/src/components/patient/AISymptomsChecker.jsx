@@ -7,7 +7,7 @@ import {
   setError,
   setLoading,
 } from "../../store/slices/patientSlice";
-import Chats from "./Chats";
+import Chats from "./Chats.jsx";
 
 const AISymptomsChecker = () => {
   const { userId } = useParams();
