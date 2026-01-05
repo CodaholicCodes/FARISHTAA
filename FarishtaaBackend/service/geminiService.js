@@ -1,10 +1,11 @@
-import { GoogleGenAI } from "@google/genai";
+import {GoogleGenAI} from "@google/genai";
 
-const ai = new GoogleGenAI({apiKey : process.env.GEMINI_API_KEY});
+const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
-const createMessagesString=(messages)=>{
-return messages.map(message=>`${message.role} : ${message.content}`).join('\n');
-}
+const createMessagesString = (messages) => {
+  return messages.map((message) => `${message.role} : ${message.content}`).join('\n');
+};
+
 const SYSTEM_PROMPT = {
   role: 'system',
   content: `You are a medical symptom checker assistant. 
@@ -31,32 +32,39 @@ You will recommend categories like this
         "Psychiatrist"   or other if any 
 5. Do not hallucinate . DO NOT ask extra questions
 `
+};
+
+export async function generateContent(language, userPrompt, messages = []) {
+  try {
+    const recentChat = messages.map((m) => ({
+      role: m.role === 'patient' ? 'user' : 'assistant',
+      content: m.content,
+    }));
+
+    const newPrompt = {
+      role: 'user',
+      content: userPrompt,
+    };
+
+    const languageToFollow = {
+      role: 'user',
+      content: `Please respond in ${language} language.`,
+    };
+
+    const finalMessages = [SYSTEM_PROMPT, ...recentChat, newPrompt, languageToFollow];
+    const newMessageList = createMessagesString(finalMessages);
+
+    const result = await ai.models.generateContent({
+      model: 'gemini-2.5-flash',
+      contents: newMessageList,
+    });
+
+    const text = result?.text ?? (typeof result === 'string' ? result : '');
+    return text.replace(/```json/g, '').replace(/```/g, '').trim();
+  } catch (err) {
+    console.error('geminiService.generateContent error:', err);
+    throw err;
+  }
 }
 
-export async function generateContent(language,userPrompt,messages=[]) {
 
-const recentChat=messages.map(m=>
-   ({
-   role : m.role==='patient'? 'user' : 'assistant',
-  content : m.content,
-  }));
-const newPrompt={
-  role : 'user',
-  content : userPrompt
-}
-const languageToFollow={
-  role : 'user',
-  content : `Please respond in ${language} language.`
-}
-
-const finalMessages=[SYSTEM_PROMPT,...recentChat,newPrompt,languageToFollow];
-const newMessageList=createMessagesString(finalMessages);
-  const result = await ai.models.generateContent({
-    model : 'gemini-2.5-flash',
-    contents:newMessageList,
-  });
-  return result.text
-  .replace(/```json/g, "")
-    .replace(/```/g, "")
-    .trim();
-}

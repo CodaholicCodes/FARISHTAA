@@ -1,8 +1,5 @@
-const ENV=process.env.NODE_ENV || 'production'
 
-require('dotenv').config({
-  path : `.env.${ENV}`
-});
+require('dotenv').config();
 
 const express = require("express");
 const app = express();
@@ -12,7 +9,7 @@ const errorController=require('./controllers/errorController');
 const patientRouter=require('./routers/patientRouter');
 const authRouter=require('./routers/authRouter');
 const mongoose=require('mongoose');
-const MONGO_DB_URL=`mongodb+srv://Codaholic:${process.env.MONGO_DB_USERNAME}@${process.env.MONGO_DB_PASSWORD}.hy9pkfk.mongodb.net/${process.env.MONGO_DB_DATABASE}?retryWrites=true&w=majority&appName=root`;
+const MONGO_DB_URL=`mongodb+srv://Codaholic:${process.env.MONGO_DB_USERNAME}@${process.env.MONGO_DB_PASSWORD}.hy9pkfk.mongodb.net/symptoms_checker?retryWrites=true&w=majority&appName=root`;
 const cors=require('cors');
 const { isLoggedIn, isPatient } = require('./middleware/auth');
 const doctorRouter = require('./routers/doctorRouter');

@@ -5,6 +5,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../store/slices/authSlice";
 import { clearChat } from "../store/slices/patientSlice";
 import { setLanguage } from "../store/slices/languageSlice";
+import { CgProfile } from "react-icons/cg";
+import { TbShieldCheckeredFilled } from "react-icons/tb";
+import { SlLogout } from "react-icons/sl";
+import { LuStethoscope } from "react-icons/lu";
+import { TiHome } from "react-icons/ti";
+
 
 const NavBar = () => {
   const dispatch = useDispatch();
@@ -15,18 +21,18 @@ const NavBar = () => {
   const handleLogout = () => {
     dispatch(clearChat());
     dispatch(logout());
-    navigate("/login");
+    navigate("/");
   };
 
   return (
-    <nav className="bg-white shadow-md sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
+    <nav className="top-0 z-50 h-15 w-full bg-white shadow-lg shadow-gray-400">
+      <div className="max-w-7xl mx-auto px-6  flex items-center justify-between py-2.5">
 
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
           <FarishtaaLogo className="w-10 h-10" />
           <div className="leading-tight">
-            <div className="text-lg font-bold text-red-600">फरिश्ता</div>
+            <div className="text-lg font-extrabold text-red-600">फरिश्ता</div>
             <div className="text-[11px] text-gray-500">Healthcare Companion</div>
           </div>
         </Link>
@@ -34,16 +40,16 @@ const NavBar = () => {
         {/* Navigation Links */}
         <div className="hidden md:flex items-center gap-6 text-sm font-medium">
           <Link to="/" className="flex items-center gap-1 text-gray-700 hover:text-red-600 transition">
-            🏠 Home
+            <TiHome /> Home
           </Link>
           <Link to="/categories" className="flex items-center gap-1 text-gray-700 hover:text-red-600 transition">
-            🩺 Consult Doctor
+            <LuStethoscope /> Consult Doctor
           </Link>
-          {isLoggedIn && (
+        
             <Link to={`/symptoms/${userId}`} className="flex items-center gap-1 text-gray-700 hover:text-red-600 transition">
-              🤖 AI Symptoms Checker
+            <TbShieldCheckeredFilled /> AI Symptoms Checker
             </Link>
-          )}
+       
         </div>
 
         {/* Right Actions */}
@@ -66,16 +72,13 @@ const NavBar = () => {
             <>
               <Link
                 to="/login"
-                className="text-sm font-medium text-gray-700 hover:text-red-600 transition"
+                className="text-xl text-gray-700 transition-transform hover:scale-105 hover:bg-red-400  transition flex flex-row items-center gap-1 border bg-red-600 text-white px-4 py-2  rounded-xl "
               >
-                🔑 Login
+                
+                 <span className="font-sans">Login</span>
+                  <CgProfile />
               </Link>
-              <Link
-                to="/signup"
-                className="px-4 py-2 rounded-full bg-red-600 text-white text-sm font-medium hover:bg-red-700 transition flex items-center gap-1"
-              >
-                🚀 Get Started
-              </Link>
+            
             </>
           ) : (
             <div className="flex items-center gap-3">
@@ -88,7 +91,7 @@ const NavBar = () => {
                 onClick={handleLogout}
                 className="text-sm text-gray-600 hover:text-red-600 transition flex items-center gap-1"
               >
-                🔓 Logout
+                <SlLogout /> Logout
               </button>
             </div>
           )}
@@ -97,5 +100,9 @@ const NavBar = () => {
     </nav>
   );
 };
+
+
+
+
 
 export default NavBar;

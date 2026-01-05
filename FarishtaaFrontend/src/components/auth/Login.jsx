@@ -49,17 +49,16 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center 
-                    bg-gradient-to-br from-red-50 via-white to-red-100 px-4">
+    <div className="min-h-screen flex items-center justify-center px-4 theme-bg">
 
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-md bg-white shadow-xl rounded-2xl p-10 
+        className="w-full max-w-md bg-white shadow-2xl rounded-2xl p-8 
                    border border-red-200 backdrop-blur-sm"
       >
         {/* Logo Block */}
         <div className="flex flex-col items-center mb-6">
-          <FarishtaaLogo />
+          <FarishtaaLogo  className="w-30 h-30"/>
 
           <h2 className="text-3xl font-bold text-red-600 mt-3 tracking-wide drop-shadow-[0_2px_6px_rgba(255,0,0,0.3)]">
             फरिश्ता
@@ -67,15 +66,15 @@ const Login = () => {
           <p className="text-sm text-red-500 mt-1">Health . Trust . Care</p>
         </div>
 
-        <h3 className="text-xl font-semibold text-red-700 mb-5 text-center">
-          Login to Your Account
+        <h3 className="text-xl text-red-700 mb-5 text-center">
+          Sign in or create account
         </h3>
 
         <ErrorMessages errors={errors} />
 
         {/* Email */}
         <label className="block text-sm font-medium text-red-700 mt-4">
-          Email
+          Enter Email
         </label>
         <input
           type="email"

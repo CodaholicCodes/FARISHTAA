@@ -33,8 +33,8 @@ let response;
   return res.status(201).json({chats : [patientChat,assistantChat]});
 
 }catch(err){
-    console.error('Error parsing JSON response:', err);
-    res.status(400).json({messages : 'Error while symptoms checking'});
+    console.error('Error in postSymptomChecker:', err);
+    res.status(500).json({message : 'Error while checking symptoms', error: err.message});
   }
 
 

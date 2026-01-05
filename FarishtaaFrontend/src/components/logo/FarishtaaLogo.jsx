@@ -1,15 +1,17 @@
-const FarishtaaLogo = () => {
+const FarishtaaLogo = ({ className = "" }) => {
   return (
     <svg
-      width="65"
-      height="65"
+      width="100%"
+      height="100%"
       viewBox="0 0 100 100"
       fill="none"
       stroke="#E50914"
       strokeWidth="3"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className="mx-auto mb-3"
+      className={`${className} inline-block align-middle`}
+      aria-hidden="true"
+      role="img"
     >
       {/* Seven-petal minimalist health flower */}
       {[...Array(7)].map((_, i) => (

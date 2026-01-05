@@ -17,11 +17,15 @@ function App() {
    
        <NavBar />
 
-        <main className="flex-grow container mx-auto px-4 py-6">
+        
           <Routes>
+              <Route path="/" element={<HomePage />} />
+              </Routes>
+              <main className="flex-grow container mx-auto ">
+                <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="/" element={<HomePage />} />
+          
             <Route path="/symptoms/:userId" element={<AISymptomsChecker />} />
             <Route path="/categories" element={<Categories />}/>
             <Route path="/nearby-search/:category" element={<DoctorByCategory />}/>
